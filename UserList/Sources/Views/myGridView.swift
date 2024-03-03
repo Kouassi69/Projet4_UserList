@@ -10,6 +10,7 @@ import SwiftUI
 struct myGridView: View {
     @ObservedObject var myViewModel: UserViewModel
     var body: some View {
+
         ScrollView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
                 ForEach(myViewModel.users) { user in
@@ -24,7 +25,6 @@ struct myGridView: View {
                     }
                     .onAppear {
                         if myViewModel.shouldLoadMoreData(currentItem: user) {
-                            print("hereprint()")
                             myViewModel.fetchUsers()
                         }
                     }
@@ -35,6 +35,8 @@ struct myGridView: View {
     }
 }
 
-#Preview {
-    myListView(myViewModel: UserViewModel(repository: UserListRepository()))
+struct myGridView_Previews: PreviewProvider {
+    static var previews: some View {
+        UserListView(myViewModel: UserViewModel(repository: UserListRepository()))
+    }
 }

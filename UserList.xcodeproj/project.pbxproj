@@ -153,8 +153,8 @@
 			isa = PBXGroup;
 			children = (
 				2FFB64292AC6D255007F2F80 /* UserListView.swift */,
-				9CC73B302B93CD5F006B24C6 /* myGridView.swift */,
 				9CC73B2E2B93CCCA006B24C6 /* myListView.swift */,
+				9CC73B302B93CD5F006B24C6 /* myGridView.swift */,
 				2F804AE12ACC976300A46A03 /* UserDetailView.swift */,
 				9CC73B2A2B93C2EA006B24C6 /* ViewExtensions.swift */,
 			);

@@ -36,3 +36,5 @@ extension View {
             }
     }
 }
+
+//let uUser: User = User(user: UserListResponse.User(from: .UTF8))

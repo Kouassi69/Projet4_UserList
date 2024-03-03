@@ -23,7 +23,9 @@ class UserViewModel: ObservableObject {
     }
 
     // Fonction asynchrone pour charger la liste des utilisateurs
+    @MainActor
     func loadUsers() async {
+        
         do {
             let fetchedUsers = try await repository.fetchUsers(quantity: 20)
             DispatchQueue.main.async { [weak self] in
@@ -36,6 +38,13 @@ class UserViewModel: ObservableObject {
 
     // TODO: - Should be a viewModel's input
     func fetchUsers() {
+
+        if Thread.isMainThread {
+            print("Ce code s'exécute sur le thread principal.")
+        } else {
+            print("Ce code s'exécute sur un thread secondaire.")
+        }
+
         isLoading = true
         Task {
             do {
@@ -48,6 +57,24 @@ class UserViewModel: ObservableObject {
         }
     }
 
+    /*func fetchUsers() {
+        Task {
+            isLoading = true // Cette ligne pourrait potentiellement être exécutée hors du thread principal
+            do {
+                let users = try await repository.fetchUsers(quantity: 20)
+                DispatchQueue.main.async { [weak self] in
+                    self?.users.append(contentsOf: users)
+                    self?.isLoading = false // Assurez-vous que ceci est exécuté sur le thread principal
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    print("Error fetching users: \(error.localizedDescription)")
+                    self.isLoading = false // Ceci doit également être sur le thread principal
+                }
+            }
+        }
+    }*/
+
     // TODO: - Should be an OutPut
     func shouldLoadMoreData(currentItem item: User) -> Bool {
         guard let lastItem = users.last else { return false }
@@ -59,7 +86,6 @@ class UserViewModel: ObservableObject {
         users.removeAll()
         fetchUsers()// fetchUsers()
     }
-
 
     // Func getImage
     func getImage(user: User, dim: Bool) -> some View {

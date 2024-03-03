@@ -33,6 +33,12 @@ struct myListView: View {
     }
 }
 
-#Preview {
+/*#Preview {
     myListView(myViewModel: UserViewModel(repository: UserListRepository()))
+}*/
+
+struct myListView_Previews: PreviewProvider {
+    static var previews: some View {
+        UserListView(myViewModel: UserViewModel(repository: UserListRepository()))
+    }
 }

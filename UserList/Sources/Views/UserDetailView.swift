@@ -31,9 +31,13 @@ struct UserDetailView: View {
         .navigationTitle("\(user.name.first) \(user.name.last)")
     }
 }
-
+/*
 struct UserDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        UserListView(myViewModel: UserViewModel(repository: UserListRepository()))
+        UserDetailView(user: UserViewModel(repository: UserListRepository()))
     }
-}
+}*/
+/*
+#Preview {
+    UserDetailView(user: User)
+}*/
